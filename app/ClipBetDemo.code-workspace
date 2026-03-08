@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../ClipBet/.claude"
+		},
+		{
+			"path": "../../ClipBet/.github"
+		},
+		{
+			"path": "../../ClipBet/docs"
+		},
+		{
+			"path": "../../ClipBet/ReactivChallengeKit"
+		},
+		{
+			"path": "../../ClipBet/scripts"
+		},
+		{
+			"path": "../../ClipBet/Submissions"
+		}
+	],
+	"settings": {}
+}

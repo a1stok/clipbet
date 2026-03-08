@@ -6,6 +6,9 @@
   --sage: #7BB89A;
   --rose: #C97B7B;
   --pink: #E8A0A0;
+
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-dm-mono: 'DM Mono', monospace;
 }
 
 @theme inline {
