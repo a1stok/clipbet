@@ -100,39 +100,50 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
              THE EXPERIENCE
            </div>
            
-           <div className="flex flex-col flex-1 min-h-[500px]">
-             <h3 className={`text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none mt-4 transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
-               {videoTime >= 30 ? "Organizer Flow." : "Bettor Flow."}
-             </h3>
+            <div className="flex flex-col flex-1 h-full">
+              <div className="h-[80px] flex items-end">
+                <AnimatePresence mode="wait">
+                  <motion.h3 
+                    key={videoTime >= 30 ? "organizer" : "bettor"}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none transition-all duration-700 delay-[600ms]"
+                  >
+                    {videoTime >= 30 ? "Organizer Flow." : "Bettor Flow."}
+                  </motion.h3>
+                </AnimatePresence>
+              </div>
 
-             <div className="relative flex-1 mt-8">
+              <div className="grid grid-cols-1 grid-rows-1 mt-12 min-h-[420px]">
                <AnimatePresence mode="wait">
                  {videoTime < 30 ? (
                    <motion.div
                      key="bettor"
-                     initial={{ opacity: 0, y: 10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     exit={{ opacity: 0, y: -10 }}
-                     transition={{ duration: 0.4 }}
-                     className="space-y-6"
+                     initial={{ opacity: 0, x: 10 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     exit={{ opacity: 0, x: -10 }}
+                     transition={{ duration: 0.3 }}
+                     className="col-start-1 row-start-1 space-y-8"
                    >
                      {/* 0:02 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:02</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Fan scans QR/NFC. Clip launches with event info and live pool stats.</p>
                      </div>
                      {/* 0:07 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:07</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Quick entry: Email, optional nickname, and outcome selection.</p>
                      </div>
                      {/* 0:17 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:17</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">One-tap payment via Apple Pay after checking estimated returns.</p>
                      </div>
                      {/* 0:20 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:20</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Success! Fan opts into closure notifications for the final result.</p>
                      </div>
@@ -140,34 +151,34 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                  ) : (
                    <motion.div
                      key="organizer"
-                     initial={{ opacity: 0, y: 10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     exit={{ opacity: 0, y: -10 }}
-                     transition={{ duration: 0.4 }}
-                     className="space-y-6"
+                     initial={{ opacity: 0, x: 10 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     exit={{ opacity: 0, x: -10 }}
+                     transition={{ duration: 0.3 }}
+                     className="col-start-1 row-start-1 space-y-8"
                    >
                      {/* 0:30 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:30</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Organizer launches `/discover` to create or manage markets.</p>
                      </div>
                      {/* 0:33 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:33</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Secure Sign In with Apple and agreement to platform terms.</p>
                      </div>
                      {/* 0:37 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:37</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market creation: Upload photo, set outcomes, time, and fees.</p>
                      </div>
                      {/* 1:02 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:02</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market goes live. Share unique QR code for immediate fan engagement.</p>
                      </div>
                      {/* 1:08 */}
-                     <div className="flex gap-4 items-start">
+                     <div className="flex gap-6 items-start">
                        <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:08</span>
                        <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Dashboard: Track real-time bets, close market, or resolve the event.</p>
                      </div>
@@ -176,9 +187,9 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                </AnimatePresence>
              </div>
 
-             {/* Interactive Timeline Controls moved here for better layout */}
+             {/* Interactive Timeline Controls */}
              <div 
-               className={`flex gap-3 w-full max-w-[400px] mt-12 transition-all duration-700 delay-[800ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+               className="flex gap-3 w-full max-w-[400px] mt-8 pt-8 border-t border-black/5"
              >
                <button 
                  onClick={() => seekTo(0)}
