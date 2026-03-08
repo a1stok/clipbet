@@ -84,7 +84,7 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
           <div className={`w-full relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] border-[6px] border-[#111] bg-[#111] aspect-[9/16] ring-1 ring-black/10 transition-all duration-1000 delay-300 ${showDemo ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
              {/* YouTube Player Container - scaled perfectly to show the shorts ui correctly */}
              <div className="w-full h-full rounded-[1.6rem] overflow-hidden relative pointer-events-none">
-                <div id="yt-player" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%]" />
+                <div id="yt-player" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%]" />
              </div>
           </div>
 

@@ -62,7 +62,7 @@ export default function Home() {
               {/* ── HERO slide ── */}
               {slide.kind === "hero" && (
                 <motion.div variants={stagger} initial="hidden" animate="show" className="text-center w-full max-w-5xl space-y-12">
-                  <motion.h1 variants={fadeUp} className="text-[12vw] md:text-[9vw] font-medium tracking-tighter italic text-[#1D352F] leading-[0.9] pr-4">
+                  <motion.h1 variants={fadeUp} className="text-[12vw] md:text-[9vw] font-medium tracking-tighter italic text-[#1D352F] leading-[0.9] pr-4 whitespace-nowrap">
                     {slide.title}
                   </motion.h1>
                   <motion.p variants={fadeUp} className="text-2xl md:text-3xl lg:text-4xl text-black/45 font-serif italic max-w-2xl mx-auto leading-normal whitespace-pre-line">
@@ -83,7 +83,7 @@ export default function Home() {
                         {slide.title.toUpperCase()}
                       </span>
                     </motion.div>
-                    <motion.h2 variants={fadeUp} className="text-5xl md:text-6xl lg:text-8xl italic font-medium tracking-tighter text-[#1D352F] leading-[0.95]">
+                    <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-7xl italic font-medium tracking-tighter text-[#1D352F] leading-[0.95] whitespace-nowrap">
                       {slide.question}
                     </motion.h2>
                   </div>
@@ -91,10 +91,10 @@ export default function Home() {
                   <motion.div variants={fadeUp} className="w-12 h-[1px] bg-black/10 mx-auto" />
 
                   {/* Bullet points */}
-                  <div className="space-y-5 flex flex-col items-center">
+                  <div className="space-y-5">
                     {slide.bullets?.map((b, i) => (
-                      <motion.div key={i} variants={fadeUp} className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left max-w-3xl mx-auto">
-                        <span className="w-2 h-2 rounded-full bg-[#7BB89A] shrink-0 sm:mt-2.5 hidden sm:block" />
+                      <motion.div key={i} variants={fadeUp} className="flex items-start gap-4 text-left max-w-3xl">
+                        <span className="w-2 h-2 rounded-full bg-[#7BB89A] shrink-0 mt-2.5" />
                         <span className="text-xl md:text-2xl text-black/80 leading-[1.4] font-medium">{b}</span>
                       </motion.div>
                     ))}
