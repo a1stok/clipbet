@@ -27,7 +27,7 @@ const SLIDES: Slide[] = [
     id: "promise",
     kind: "hero",
     title: "No App. No Account.",
-    subtitle: "Open a link, place a bet, and walk away. That simple.",
+    subtitle: "Open a link, place a bet, and walk away.\nThat simple.",
   },
 
   /* ── Q1 : Problem Framing ── */
@@ -159,7 +159,7 @@ export default function Home() {
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 0.9, y: 0 }}
-          className="text-xl font-medium tracking-tight italic"
+          className="text-3xl font-semibold tracking-tight italic"
         >
           ClipBet
         </motion.h1>
@@ -201,12 +201,12 @@ export default function Home() {
                   </motion.h2>
                   <motion.p
                     variants={fadeUp}
-                    className="text-2xl md:text-4xl italic text-black/60 max-w-2xl mx-auto leading-relaxed"
+                    className="text-2xl md:text-4xl italic text-black/60 max-w-2xl mx-auto leading-relaxed whitespace-pre-line"
                   >
                     {slide.subtitle}
                   </motion.p>
                   <motion.div variants={fadeUp} className="pt-14 opacity-15">
-                    <p className="mono text-[9px] tracking-[0.4em]">
+                    <p className="mono text-sm tracking-[0.3em]">
                       PRESS → TO CONTINUE
                     </p>
                   </motion.div>
@@ -280,19 +280,19 @@ export default function Home() {
                       <div className="space-y-5 text-center">
                         <motion.div
                           variants={fadeUp}
-                          className="mono text-[9px] tracking-[0.5em] text-[#1D352F] opacity-40"
+                          className="mono text-sm tracking-[0.4em] text-[#1D352F] opacity-40"
                         >
                           FINAL STEP
                         </motion.div>
                         <motion.h2
                           variants={fadeUp}
-                          className="text-5xl md:text-7xl font-light tracking-tighter italic text-[#1D352F]"
+                          className="text-7xl md:text-8xl font-medium tracking-tighter italic text-[#1D352F]"
                         >
                           {slide.title}
                         </motion.h2>
                         <motion.p
                           variants={fadeUp}
-                          className="text-lg text-black/45 italic"
+                          className="text-2xl md:text-3xl text-black/45 italic"
                         >
                           {slide.subtitle}
                         </motion.p>
@@ -310,12 +310,12 @@ export default function Home() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="your@email.com"
-                          className="w-full bg-transparent border-b-2 border-black/10 py-5 text-2xl font-serif focus:outline-none focus:border-[#7BB89A] transition-colors placeholder:opacity-10 italic text-[#1D352F] text-center"
+                          className="w-full bg-transparent border-b-2 border-black/10 py-5 text-3xl font-serif focus:outline-none focus:border-[#7BB89A] transition-colors placeholder:opacity-50 placeholder:text-black/40 italic text-[#1D352F] text-center"
                           required
                         />
                         <button
                           type="submit"
-                          className="mt-10 w-full py-5 rounded-full bg-[#1D352F] text-white mono text-[9px] font-bold tracking-[0.25em] hover:bg-black transition-all active:scale-[0.97] shadow-xl"
+                          className="mt-10 w-full py-6 rounded-full bg-[#1D352F] text-white mono text-base font-bold tracking-[0.2em] hover:bg-black transition-all active:scale-[0.97] shadow-xl"
                         >
                           ENTER THE MARKET →
                         </button>
@@ -326,16 +326,31 @@ export default function Home() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={SWIFT_SPRING}
-                      className="space-y-10"
+                      className="space-y-12"
                     >
                       <div className="space-y-3">
-                        <h3 className="text-5xl md:text-7xl italic font-light tracking-tighter text-[#1D352F]">
+                        <h3 className="text-7xl md:text-8xl italic font-medium tracking-tighter text-[#1D352F]">
                           All Set.
                         </h3>
-                        <p className="opacity-50 max-w-xs mx-auto text-lg font-serif italic leading-relaxed">
-                          We will reach out when the next market opens.
+                        <p className="opacity-50 max-w-sm mx-auto text-2xl font-serif italic leading-relaxed">
+                          We will reach out when<br />the next market opens.
                         </p>
                       </div>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ ...SWIFT_SPRING, delay: 0.4 }}
+                        className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-black/5"
+                      >
+                        <video
+                          src="/demo.mp4"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-auto"
+                        />
+                      </motion.div>
                     </motion.div>
                   )}
                 </motion.div>
