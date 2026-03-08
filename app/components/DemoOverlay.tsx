@@ -59,10 +59,13 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
   // Trigger play only when showDemo becomes true
   useEffect(() => {
     if (showDemo && playerRef.current && playerRef.current.playVideo) {
-      // Small delay prevents autoplay blocking policies in some browsers
+      // Always start from the beginning
+      if (playerRef.current.seekTo) {
+        playerRef.current.seekTo(0, true);
+      }
       setTimeout(() => {
         playerRef.current.playVideo();
-      }, 500);
+      }, 300);
     }
   }, [showDemo]);
 
