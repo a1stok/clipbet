@@ -1,7 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 /* ─── Slide Data ─── */
 
@@ -126,7 +133,56 @@ export default function Home() {
   const [dir, setDir] = useState(0);
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const playerRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!showDemo) return;
+    
+    // Load YouTube IFrame API
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player("yt-player", {
+        // Placeholder YouTube ID (replace with actual unlisted YouTube video)
+        videoId: "M7lc1UVf-VE", // Using a dummy YouTube Dev video for testing
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          mute: 1,
+          loop: 1,
+          playlist: "M7lc1UVf-VE" // Required for looping single video
+        },
+        events: {
+          onReady: (event: any) => {
+            event.target.playVideo();
+          }
+        }
+      });
+    };
+
+    // If API is already loaded
+    if (window.YT && window.YT.Player && !playerRef.current) {
+      window.onYouTubeIframeAPIReady();
+    }
+  }, [showDemo]);
+
+  const seekTo = (seconds: number) => {
+    if (playerRef.current && playerRef.current.seekTo) {
+      playerRef.current.seekTo(seconds, true);
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -321,10 +377,12 @@ export default function Home() {
                         </button>
                       </motion.form>
                     </div>
-                  ) : (
+                  ) : !showDemo ? (
                     <motion.div
+                      key="allSet"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                       transition={SWIFT_SPRING}
                       className="space-y-12"
                     >
@@ -337,20 +395,122 @@ export default function Home() {
                         </p>
                       </div>
                       <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ ...SWIFT_SPRING, delay: 0.4 }}
-                        className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-black/5"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="pt-8"
                       >
-                        <video
-                          src="/demo.mp4"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-auto"
-                        />
+                        <button
+                          onClick={() => setShowDemo(true)}
+                          className="px-10 py-5 rounded-full border border-[#1D352F]/20 text-[#1D352F] mono text-sm font-bold tracking-[0.2em] hover:bg-[#1D352F]/5 transition-all active:scale-[0.97]"
+                        >
+                          WATCH DEMO
+                        </button>
                       </motion.div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="demo"
+                      initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                      transition={SWIFT_SPRING}
+                      className="w-[90vw] max-w-7xl -ml-[calc(45vw-50%)] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center justify-center pt-8"
+                    >
+                      {/* Left Side: Video iframe & Controls */}
+                      <div className="flex flex-col items-center gap-6 w-full max-w-[340px] mx-auto lg:ml-auto lg:mr-8">
+                        {/* Phone Bezel */}
+                        <div className="w-full relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] border-4 border-[#111] bg-[#111] aspect-[9/16] ring-1 ring-black/10">
+                           {/* YouTube Player Container - scaled slightly to hide YouTube watermarks if necessary */}
+                           <div className="w-full h-full rounded-[1.8rem] overflow-hidden relative pointer-events-none">
+                              <div id="yt-player" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%]" />
+                           </div>
+                        </div>
+
+                        {/* Interactive Timeline Controls */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.8 }}
+                          className="flex gap-3 w-full"
+                        >
+                          <button 
+                            onClick={() => seekTo(0)}
+                            className="flex-1 py-3 px-4 rounded-xl bg-black/5 hover:bg-black/10 border border-black/5 text-[#1D352F] text-xs font-bold tracking-widest transition-all active:scale-95"
+                          >
+                            USER FLOW (0s)
+                          </button>
+                          <button 
+                            onClick={() => seekTo(30)}
+                            className="flex-1 py-3 px-4 rounded-xl bg-black/5 hover:bg-black/10 border border-black/5 text-[#1D352F] text-xs font-bold tracking-widest transition-all active:scale-95"
+                          >
+                            ORGANIZER FLOW (30s)
+                          </button>
+                        </motion.div>
+                      </div>
+
+                      {/* Right Side: Flow description layout */}
+                      <div className="space-y-8 text-left max-w-lg mx-auto lg:mr-auto lg:ml-8 w-full py-12">
+                        <div className="mono text-sm tracking-[0.4em] text-[#7BB89A] font-bold">
+                          THE EXPERIENCE
+                        </div>
+                        <h3 className="text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none">
+                          Bettor Flow.
+                        </h3>
+                        <div className="space-y-6 pt-4">
+                          <motion.div 
+                            initial={{ opacity: 0, y: 15 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            transition={{ ...SWIFT_SPRING, delay: 2.0 }} 
+                            className="flex gap-4 items-start"
+                          >
+                            <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">
+                              0:02
+                            </span>
+                            <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">
+                              Viewing event info, total pool, and active bettors.
+                            </p>
+                          </motion.div>
+                          <motion.div 
+                            initial={{ opacity: 0, y: 15 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            transition={{ ...SWIFT_SPRING, delay: 7.0 }} 
+                            className="flex gap-4 items-start"
+                          >
+                            <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">
+                              0:07
+                            </span>
+                            <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">
+                              Entering email & nickname, selecting outcome and amount.
+                            </p>
+                          </motion.div>
+                          <motion.div 
+                            initial={{ opacity: 0, y: 15 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            transition={{ ...SWIFT_SPRING, delay: 17.0 }} 
+                            className="flex gap-4 items-start"
+                          >
+                            <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">
+                              0:17
+                            </span>
+                            <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">
+                              Rechecking estimated return, confirming, and paying.
+                            </p>
+                          </motion.div>
+                          <motion.div 
+                            initial={{ opacity: 0, y: 15 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            transition={{ ...SWIFT_SPRING, delay: 20.0 }} 
+                            className="flex gap-4 items-start"
+                          >
+                            <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">
+                              0:20
+                            </span>
+                            <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">
+                              Bet successfully placed. Enabling closure notifications.
+                            </p>
+                          </motion.div>
+                        </div>
+                      </div>
                     </motion.div>
                   )}
                 </motion.div>
