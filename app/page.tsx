@@ -328,9 +328,6 @@ export default function Home() {
                       transition={SWIFT_SPRING}
                       className="space-y-10"
                     >
-                      <div className="w-16 h-16 rounded-full bg-[#7BB89A]/10 flex items-center justify-center mx-auto border-2 border-[#7BB89A]/20">
-                        <div className="w-2 h-2 rounded-full bg-[#7BB89A] shadow-[0_0_16px_#7BB89A]" />
-                      </div>
                       <div className="space-y-3">
                         <h3 className="text-5xl md:text-7xl italic font-light tracking-tighter text-[#1D352F]">
                           All Set.
