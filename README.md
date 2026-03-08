@@ -4,13 +4,15 @@ Instant prediction markets at live events. No app, no account, no friction.
 
 ## How It Works
 
-**Bettors:** Scan > Bet > Leave
+**User Flow:** Scan > Bet > Leave
 
-**Organizers:** Scan > Create Event > Manage Dashboard > Leave
+**Organizer Flow:** Scan > Create Event > Manage Dashboard > Leave
 
-## Demo
+## ClipBet Demo
 
-[Watch the demo](https://youtube.com/shorts/yDGhNRkr158)
+Please allow a few moments to load, or [access via Google Drive](https://drive.google.com/file/d/1arkTgzk7cXeK3CRYdO5rOis4Jtj7y74J/view?usp=sharing).
+
+![ClipBet Demo](public/ClipBet%20Demo%20K%20and%20M.gif)
 
 ## Tech Stack
 
