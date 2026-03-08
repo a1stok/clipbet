@@ -44,6 +44,13 @@ export default function Home() {
       {/* Background radial gradient */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(123,184,154,0.08),transparent_50%)]" />
 
+      {/* Floating Logo */}
+      <div className="absolute top-8 left-8 md:top-12 md:left-12 z-50 pointer-events-none">
+        <span className="text-3xl md:text-4xl font-serif font-semibold italic text-[#1D352F] tracking-tight">
+          ClipBet
+        </span>
+      </div>
+
       {/* ── GLOBAL PRELOADED DEMO OVERLAY ── */}
       <DemoOverlay showDemo={showDemo} />
 

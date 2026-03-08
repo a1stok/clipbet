@@ -1,5 +1,7 @@
 # ClipBet
 
+<img src="public/ClipBet%20logo.png" alt="ClipBet Logo" width="250"/>
+
 Instant prediction markets at live events. No app, no account, no friction.
 
 ## How It Works
@@ -13,6 +15,10 @@ Instant prediction markets at live events. No app, no account, no friction.
 Please allow a few moments to load, or [access via Google Drive](https://drive.google.com/file/d/1arkTgzk7cXeK3CRYdO5rOis4Jtj7y74J/view?usp=sharing).
 
 ![ClipBet Demo](public/ClipBet%20Demo%20K%20and%20M.gif)
+
+## Database Schema
+
+![Supabase Schema](public/supabase-schema-clipbet.svg)
 
 ## Tech Stack (Demo Website)
 
