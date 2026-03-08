@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF8F5; /* Warm Cream */
+  --foreground: #1A1814; /* Dark Editorial */
+  --sage: #7BB89A;
+  --rose: #C97B7B;
+  --pink: #E8A0A0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-sage: var(--sage);
+  --color-rose: var(--rose);
+  --color-pink: var(--pink);
+  
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-dm-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif), serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Hairline divider utility */
+.divider {
+  border-top: 1px solid rgba(26, 24, 20, 0.1);
+}
+
+.divider-v {
+  border-left: 1px solid rgba(26, 24, 20, 0.1);
 }
