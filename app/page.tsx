@@ -134,6 +134,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const [videoTime, setVideoTime] = useState(0); // 0 = User Flow, 30 = Organizer Flow
   const [mounted, setMounted] = useState(false);
   const playerRef = useRef<any>(null);
 
@@ -179,6 +180,7 @@ export default function Home() {
   }, [showDemo]);
 
   const seekTo = (seconds: number) => {
+    setVideoTime(seconds);
     if (playerRef.current && playerRef.current.seekTo) {
       playerRef.current.seekTo(seconds, true);
     }
@@ -435,15 +437,15 @@ export default function Home() {
                         >
                           <button 
                             onClick={() => seekTo(0)}
-                            className="flex-1 py-3 px-4 rounded-xl bg-black/5 hover:bg-black/10 border border-black/5 text-[#1D352F] text-xs font-bold tracking-widest transition-all active:scale-95"
+                            className={`flex-1 py-3 px-4 rounded-xl border text-xs font-bold tracking-widest transition-all active:scale-95 ${videoTime === 0 ? 'bg-black/10 border-black/10 text-[#1D352F]' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
                           >
-                            USER FLOW (0s)
+                            USER FLOW
                           </button>
                           <button 
                             onClick={() => seekTo(30)}
-                            className="flex-1 py-3 px-4 rounded-xl bg-black/5 hover:bg-black/10 border border-black/5 text-[#1D352F] text-xs font-bold tracking-widest transition-all active:scale-95"
+                            className={`flex-1 py-3 px-4 rounded-xl border text-xs font-bold tracking-widest transition-all active:scale-95 ${videoTime === 30 ? 'bg-black/10 border-black/10 text-[#1D352F]' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
                           >
-                            ORGANIZER FLOW (30s)
+                            ORGANIZER
                           </button>
                         </motion.div>
                       </div>
