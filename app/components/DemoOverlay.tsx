@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 declare global {
   interface Window {
@@ -91,102 +92,107 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
              </div>
           </div>
 
-          {/* Interactive Timeline Controls */}
-          <div 
-            className={`flex gap-3 w-full transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          >
-            <button 
-              onClick={() => seekTo(0)}
-              className={`flex-1 py-3 px-4 rounded-xl border text-xs font-bold tracking-widest transition-all active:scale-95 ${videoTime === 0 ? 'bg-black/10 border-black/10 text-[#1D352F]' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
-            >
-              USER FLOW
-            </button>
-            <button 
-              onClick={() => seekTo(30)}
-              className={`flex-1 py-3 px-4 rounded-xl border text-xs font-bold tracking-widest transition-all active:scale-95 ${videoTime === 30 ? 'bg-black/10 border-black/10 text-[#1D352F]' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
-            >
-              ORGANIZER
-            </button>
-          </div>
         </div>
 
         {/* Right Side: Flow description layout */}
-        <div className="space-y-8 text-left max-w-lg mx-auto lg:mr-auto lg:ml-8 w-full py-12">
+        <div className="flex flex-col h-full max-w-lg mx-auto lg:mr-auto lg:ml-0 w-full py-12">
            <div className={`mono text-sm tracking-[0.4em] text-[#7BB89A] font-bold transition-all duration-700 delay-[500ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
              THE EXPERIENCE
            </div>
-           <h3 className={`text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
-             {videoTime === 30 ? "Organizer Flow." : "Bettor Flow."}
-           </h3>
-           <div className="space-y-6 pt-4 relative">
-             
-             {/* ── BETTOR FLOW ── */}
-             <div className={`transition-all duration-700 absolute inset-0 ${videoTime === 0 ? 'opacity-100 translate-y-0 pointer-events-auto delay-[1000ms]' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-               <div className="space-y-6">
-                 {/* 0:02 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:02</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Viewing event info, total pool, and active bettors.</p>
-                 </div>
-                 {/* 0:07 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:07</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Entering email & nickname, selecting outcome and amount.</p>
-                 </div>
-                 {/* 0:17 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:17</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Rechecking estimated return, confirming, and paying.</p>
-                 </div>
-                 {/* 0:20 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:20</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Bet successfully placed. Enabling closure notifications.</p>
-                 </div>
-               </div>
+           
+           <div className="flex flex-col flex-1 min-h-[500px]">
+             <h3 className={`text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none mt-4 transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
+               {videoTime >= 30 ? "Organizer Flow." : "Bettor Flow."}
+             </h3>
+
+             <div className="relative flex-1 mt-8">
+               <AnimatePresence mode="wait">
+                 {videoTime < 30 ? (
+                   <motion.div
+                     key="bettor"
+                     initial={{ opacity: 0, y: 10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     exit={{ opacity: 0, y: -10 }}
+                     transition={{ duration: 0.4 }}
+                     className="space-y-6"
+                   >
+                     {/* 0:02 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:02</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Fan scans QR/NFC. Clip launches with event info and live pool stats.</p>
+                     </div>
+                     {/* 0:07 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:07</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Quick entry: Email, optional nickname, and outcome selection.</p>
+                     </div>
+                     {/* 0:17 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:17</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">One-tap payment via Apple Pay after checking estimated returns.</p>
+                     </div>
+                     {/* 0:20 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:20</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Success! Fan opts into closure notifications for the final result.</p>
+                     </div>
+                   </motion.div>
+                 ) : (
+                   <motion.div
+                     key="organizer"
+                     initial={{ opacity: 0, y: 10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     exit={{ opacity: 0, y: -10 }}
+                     transition={{ duration: 0.4 }}
+                     className="space-y-6"
+                   >
+                     {/* 0:30 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:30</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Organizer launches `/discover` to create or manage markets.</p>
+                     </div>
+                     {/* 0:33 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:33</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Secure Sign In with Apple and agreement to platform terms.</p>
+                     </div>
+                     {/* 0:37 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:37</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market creation: Upload photo, set outcomes, time, and fees.</p>
+                     </div>
+                     {/* 1:02 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:02</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market goes live. Share unique QR code for immediate fan engagement.</p>
+                     </div>
+                     {/* 1:08 */}
+                     <div className="flex gap-4 items-start">
+                       <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:08</span>
+                       <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Dashboard: Track real-time bets, close market, or resolve the event.</p>
+                     </div>
+                   </motion.div>
+                 )}
+               </AnimatePresence>
              </div>
 
-             {/* ── ORGANIZER FLOW ── */}
-             <div className={`transition-all duration-700 absolute inset-0 ${videoTime === 30 ? 'opacity-100 translate-y-0 pointer-events-auto delay-[500ms]' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-               <div className="space-y-6">
-                 {/* 0:30 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:30</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Viewing event info, pool, and bettors.</p>
-                 </div>
-                 {/* 0:33 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:33</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Signing in with Apple.</p>
-                 </div>
-                 {/* 0:35 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:35</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Agreeing with terms of service.</p>
-                 </div>
-                 {/* 0:37 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:37</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Defining event info and outcomes.</p>
-                 </div>
-                 {/* 0:57 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:57</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Previewing and creating market.</p>
-                 </div>
-                 {/* 1:02 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:02</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market is live! Generating QR for sharing.</p>
-                 </div>
-                 {/* 1:08 */}
-                 <div className="flex gap-4 items-start">
-                   <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:08</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Managing dashboard and closing bets.</p>
-                 </div>
-               </div>
+             {/* Interactive Timeline Controls moved here for better layout */}
+             <div 
+               className={`flex gap-3 w-full max-w-[400px] mt-12 transition-all duration-700 delay-[800ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+             >
+               <button 
+                 onClick={() => seekTo(0)}
+                 className={`flex-1 py-4 px-6 rounded-2xl border text-sm font-bold tracking-widest transition-all active:scale-95 ${videoTime < 30 ? 'bg-[#1D352F] border-[#1D352F] text-white shadow-lg' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
+               >
+                 BETTOR FLOW
+               </button>
+               <button 
+                 onClick={() => seekTo(30)}
+                 className={`flex-1 py-4 px-6 rounded-2xl border text-sm font-bold tracking-widest transition-all active:scale-95 ${videoTime >= 30 ? 'bg-[#1D352F] border-[#1D352F] text-white shadow-lg' : 'bg-black/5 hover:bg-black/10 border-black/5 text-[#1D352F]/60'}`}
+               >
+                 OPERATOR
+               </button>
              </div>
-
            </div>
         </div>
       </div>

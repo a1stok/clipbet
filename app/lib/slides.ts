@@ -30,9 +30,9 @@ export const SLIDES: Slide[] = [
     title: "The Problem",
     question: "What friction are we solving?",
     bullets: [
-      "Artists don't know who their fans are — ticketing platforms keep that data.",
-      "Long merch lines at venues mean lost sales and frustrated fans.",
-      "There is no direct relationship between the brand and the audience.",
+      "No simple way to act on in-the-moment hype at bars, games, or concerts.",
+      "Traditional apps require accounts and identity checks that kill the spontaneity.",
+      "Venues lack tools to turn fan energy into revenue and captured identity.",
     ],
   },
   /* ── Q2 : Proposed Solution ── */
@@ -42,9 +42,9 @@ export const SLIDES: Slide[] = [
     title: "The Solution",
     question: "How does ClipBet work?",
     bullets: [
-      "Fan scans a QR code or taps an NFC tag at the venue.",
-      "An App Clip opens instantly — no download, no sign-up.",
-      "Fan places a prediction, engages with merch, and checks out in under 30 seconds.",
+      "Scan a QR code or tap an NFC tag to launch the Clip instantly.",
+      "Place a small prediction and pay with Apple Pay in under 30 seconds.",
+      "No app download or account creation required to participate.",
     ],
   },
   /* ── Q3 : 8-Hour Window ── */
@@ -52,11 +52,11 @@ export const SLIDES: Slide[] = [
     id: "q3",
     kind: "qa",
     title: "The Window",
-    question: "How do we keep fans engaged?",
+    question: "How do we close the loop?",
     bullets: [
-      "After opening, the Clip can send push notifications for 8 hours.",
-      "Post-show nudges drive fans to the online store while excitement is high.",
-      "This turns a single scan into a lasting direct channel.",
+      "8-hour notification window is used to send results, not spam.",
+      "Alerts for 'Bets Close' and 'Event Resolution' keep fans engaged.",
+      "Automatic settlements ensure a fair and trustless experience.",
     ],
   },
   /* ── Q4 : Platform Extensions ── */
@@ -64,11 +64,11 @@ export const SLIDES: Slide[] = [
     id: "q4",
     kind: "qa",
     title: "Platform Ideas",
-    question: "What new capabilities would we build?",
+    question: "What new capabilities are we adding?",
     bullets: [
-      "Native prediction-market primitives inside Reactiv Clips.",
-      "Real-time crowd sentiment dashboards for artists and brands.",
-      "Contextual AI recommendations based on time, location, and event type.",
+      "Persistent organizer sessions for managing multiple live markets.",
+      "Role-aware views: same URL shows dashboard for owners, bettor UI for fans.",
+      "Seamless integration with venue-specific payouts and analytics.",
     ],
   },
   /* ── Q5 : Impact Hypothesis ── */
@@ -76,11 +76,11 @@ export const SLIDES: Slide[] = [
     id: "q5",
     kind: "qa",
     title: "The Impact",
-    question: "Why does this matter for revenue?",
+    question: "Why does this matter?",
     bullets: [
-      "Captures fan identity at scale with zero friction.",
-      "Shifts merch sales from venue (revenue-shared) to online (full margin).",
-      "Creates a reusable engagement channel for future tours and drops.",
+      "Estimated 20-30% participation rate by removing the download barrier.",
+      "Turns passive observers into active participants at peak excitement.",
+      "Builds direct relationships between venues, organizers, and fans.",
     ],
   },
 
