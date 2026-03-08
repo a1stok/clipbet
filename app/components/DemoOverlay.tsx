@@ -167,22 +167,22 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                  {/* 0:37 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:37</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Creating market: event photo, name, description, adding outcomes, defining event time, location, minimum bet.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Defining event details, adding outcomes, and setting rules.</p>
                  </div>
                  {/* 0:57 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:57</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Previewing market and creating market.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Previewing and creating market.</p>
                  </div>
                  {/* 1:02 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:02</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market is live! QR code generated and displayed to user, able to scan, access share functionality, navigating to dashboard.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market is live. QR code generated for sharing.</p>
                  </div>
                  {/* 1:08 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:08</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Access to dashboard with total pool, bettors, fee earned as organizer, outcomes. Ability to close bets, cancel and refund all, resolve events, and generate printable PDF.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Managing dashboard, closing bets, and resolving payouts.</p>
                  </div>
                </div>
              </div>
