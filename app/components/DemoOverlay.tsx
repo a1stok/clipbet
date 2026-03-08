@@ -10,10 +10,10 @@ declare global {
 }
 
 interface DemoOverlayProps {
-  done: boolean;
+  showDemo: boolean;
 }
 
-export function DemoOverlay({ done }: DemoOverlayProps) {
+export function DemoOverlay({ showDemo }: DemoOverlayProps) {
   const [videoTime, setVideoTime] = useState(0); 
   const playerRef = useRef<any>(null);
 
@@ -30,7 +30,7 @@ export function DemoOverlay({ done }: DemoOverlayProps) {
       playerRef.current = new window.YT.Player("yt-player", {
         videoId: "yDGhNRkr158",
         playerVars: {
-          autoplay: 1,
+          autoplay: 0,
           controls: 0,
           disablekb: 1,
           fs: 0,
@@ -43,7 +43,7 @@ export function DemoOverlay({ done }: DemoOverlayProps) {
         },
         events: {
           onReady: (event: any) => {
-            event.target.playVideo();
+            // Player is ready but waiting for showDemo
           }
         }
       });
@@ -56,6 +56,16 @@ export function DemoOverlay({ done }: DemoOverlayProps) {
     }
   }, []);
 
+  // Trigger play only when showDemo becomes true
+  useEffect(() => {
+    if (showDemo && playerRef.current && playerRef.current.playVideo) {
+      // Small delay prevents autoplay blocking policies in some browsers
+      setTimeout(() => {
+        playerRef.current.playVideo();
+      }, 500);
+    }
+  }, [showDemo]);
+
   const seekTo = (seconds: number) => {
     setVideoTime(seconds);
     if (playerRef.current && playerRef.current.seekTo) {
@@ -65,22 +75,22 @@ export function DemoOverlay({ done }: DemoOverlayProps) {
 
   return (
     <div 
-      className={`fixed inset-0 w-full h-full z-[100] bg-[#FDFCFB] flex items-center justify-center transition-all duration-1000 ${done ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      className={`fixed inset-0 w-full h-full z-[100] bg-[#FDFCFB] flex items-center justify-center transition-all duration-1000 overflow-y-auto py-12 ${showDemo ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
     >
-      <div className="w-[90vw] max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center justify-center pt-8">
+      <div className="w-[90vw] max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center justify-center min-h-[700px]">
         {/* Left Side: Video iframe & Controls */}
-        <div className="flex flex-col items-center gap-6 w-full max-w-[340px] mx-auto lg:ml-auto lg:mr-8">
+        <div className="flex flex-col items-center gap-6 w-full max-w-[400px] mx-auto lg:ml-auto lg:mr-8">
           {/* Phone Bezel */}
-          <div className={`w-full relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] border-4 border-[#111] bg-[#111] aspect-[9/16] ring-1 ring-black/10 transition-all duration-1000 delay-300 ${done ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
-             {/* YouTube Player Container - scaled slightly to hide YouTube watermarks if necessary */}
-             <div className="w-full h-full rounded-[1.8rem] overflow-hidden relative pointer-events-none">
-                <div id="yt-player" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%]" />
+          <div className={`w-full relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] border-[6px] border-[#111] bg-[#111] aspect-[9/16] ring-1 ring-black/10 transition-all duration-1000 delay-300 ${showDemo ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+             {/* YouTube Player Container - scaled perfectly to show the shorts ui correctly */}
+             <div className="w-full h-full rounded-[1.6rem] overflow-hidden relative pointer-events-none">
+                <div id="yt-player" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%]" />
              </div>
           </div>
 
           {/* Interactive Timeline Controls */}
           <div 
-            className={`flex gap-3 w-full transition-all duration-700 delay-[600ms] ${done ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`flex gap-3 w-full transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
             <button 
               onClick={() => seekTo(0)}
@@ -99,30 +109,30 @@ export function DemoOverlay({ done }: DemoOverlayProps) {
 
         {/* Right Side: Flow description layout */}
         <div className="space-y-8 text-left max-w-lg mx-auto lg:mr-auto lg:ml-8 w-full py-12">
-           <div className={`mono text-sm tracking-[0.4em] text-[#7BB89A] font-bold transition-all duration-700 delay-[500ms] ${done ? 'opacity-100' : 'opacity-0'}`}>
+           <div className={`mono text-sm tracking-[0.4em] text-[#7BB89A] font-bold transition-all duration-700 delay-[500ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
              THE EXPERIENCE
            </div>
-           <h3 className={`text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none transition-all duration-700 delay-[600ms] ${done ? 'opacity-100' : 'opacity-0'}`}>
+           <h3 className={`text-5xl md:text-6xl italic font-medium tracking-tighter text-[#1D352F] leading-none transition-all duration-700 delay-[600ms] ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
              Bettor Flow.
            </h3>
            <div className="space-y-6 pt-4">
              {/* 0:02 */}
-             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1000ms] ${done ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1000ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:02</span>
                <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Viewing event info, total pool, and active bettors.</p>
              </div>
              {/* 0:07 */}
-             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1300ms] ${done ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1300ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:07</span>
                <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Entering email & nickname, selecting outcome and amount.</p>
              </div>
              {/* 0:17 */}
-             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1600ms] ${done ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1600ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:17</span>
                <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Rechecking estimated return, confirming, and paying.</p>
              </div>
              {/* 0:20 */}
-             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1900ms] ${done ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+             <div className={`flex gap-4 items-start transition-all duration-700 delay-[1900ms] ${showDemo ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:20</span>
                <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Bet successfully placed. Enabling closure notifications.</p>
              </div>

@@ -11,12 +11,13 @@ export default function Home() {
   const [dir, setDir] = useState(0);
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const onKey = (e: KeyboardEvent) => {
-      if (done) return;
+      if (done || showDemo) return;
       if (e.key === "ArrowRight" && idx < SLIDES.length - 1) {
         setDir(1);
         setIdx((p) => p + 1);
@@ -44,7 +45,7 @@ export default function Home() {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(123,184,154,0.08),transparent_50%)]" />
 
       {/* ── GLOBAL PRELOADED DEMO OVERLAY ── */}
-      <DemoOverlay done={done} />
+      <DemoOverlay showDemo={showDemo} />
 
       <main className="relative z-10 w-full px-8 md:px-12 pt-12 pb-32 flex flex-col justify-center min-h-screen max-w-[1600px] mx-auto overflow-y-auto">
         <div className="flex-1 flex flex-col justify-center items-center w-full">
@@ -109,40 +110,74 @@ export default function Home() {
               {/* ── SIGNUP slide ── */}
               {slide.kind === "signup" && (
                 <motion.div variants={stagger} initial="hidden" animate="show" className="w-full max-w-lg">
-                  <div className="space-y-14">
-                    <div className="space-y-5 text-center">
-                      <motion.div variants={fadeUp} className="mono text-sm tracking-[0.4em] text-[#1D352F] opacity-40">
-                        FINAL STEP
-                      </motion.div>
-                      <motion.h2 variants={fadeUp} className="text-7xl md:text-8xl font-medium tracking-tighter italic text-[#1D352F]">
-                        {slide.title}
-                      </motion.h2>
-                      <motion.p variants={fadeUp} className="text-2xl md:text-3xl text-black/45 italic">
-                        {slide.subtitle}
-                      </motion.p>
-                    </div>
+                    {/* Form State */}
+                    {!done ? (
+                      <div className="space-y-14">
+                        <div className="space-y-5 text-center">
+                          <motion.div variants={fadeUp} className="mono text-sm tracking-[0.4em] text-[#1D352F] opacity-40">
+                            FINAL STEP
+                          </motion.div>
+                          <motion.h2 variants={fadeUp} className="text-7xl md:text-8xl font-medium tracking-tighter italic text-[#1D352F]">
+                            {slide.title}
+                          </motion.h2>
+                          <motion.p variants={fadeUp} className="text-2xl md:text-3xl text-black/45 italic">
+                            {slide.subtitle}
+                          </motion.p>
+                        </div>
 
-                    <motion.form variants={fadeUp} onSubmit={submit} className="space-y-0 relative z-20">
-                      <input
-                        id="email"
-                        type="email"
-                        autoFocus
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="your@email.com"
-                        className="w-full bg-transparent border-b-2 border-black/10 py-5 text-3xl font-serif focus:outline-none focus:border-[#7BB89A] transition-colors placeholder:opacity-50 placeholder:text-black/40 italic text-[#1D352F] text-center"
-                        required
-                      />
-                      <button
-                        type="submit"
-                        className="mt-10 w-full py-6 rounded-full bg-[#1D352F] text-white mono text-base font-bold tracking-[0.2em] hover:bg-black transition-all active:scale-[0.97] shadow-xl"
+                        <motion.form variants={fadeUp} onSubmit={submit} className="space-y-0 relative z-20">
+                          <input
+                            id="email"
+                            type="email"
+                            autoFocus
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="your@email.com"
+                            className="w-full bg-transparent border-b-2 border-black/10 py-5 text-3xl font-serif focus:outline-none focus:border-[#7BB89A] transition-colors placeholder:opacity-50 placeholder:text-black/40 italic text-[#1D352F] text-center"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            className="mt-10 w-full py-6 rounded-full bg-[#1D352F] text-white mono text-base font-bold tracking-[0.2em] hover:bg-black transition-all active:scale-[0.97] shadow-xl"
+                          >
+                            ENTER THE MARKET →
+                          </button>
+                        </motion.form>
+                      </div>
+                    ) : !showDemo ? (
+                      <motion.div
+                        key="allSet"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                        transition={SWIFT_SPRING}
+                        className="space-y-12 text-center"
                       >
-                        ENTER THE MARKET →
-                      </button>
-                    </motion.form>
-                  </div>
-                </motion.div>
-              )}
+                        <div className="space-y-3">
+                          <h3 className="text-7xl md:text-8xl italic font-medium tracking-tighter text-[#1D352F]">
+                            All Set.
+                          </h3>
+                          <p className="opacity-50 max-w-sm mx-auto text-2xl font-serif italic leading-relaxed">
+                            We will reach out when<br />the next market opens.
+                          </p>
+                        </div>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.6 }}
+                          className="pt-8"
+                        >
+                          <button
+                            onClick={() => setShowDemo(true)}
+                            className="px-10 py-5 rounded-full border border-[#1D352F]/20 text-[#1D352F] mono text-sm font-bold tracking-[0.2em] hover:bg-[#1D352F]/5 transition-all active:scale-[0.97]"
+                          >
+                            WATCH DEMO
+                          </button>
+                        </motion.div>
+                      </motion.div>
+                    ) : null}
+                  </motion.div>
+                )}
             </motion.div>
           </AnimatePresence>
         </div>
