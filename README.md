@@ -14,7 +14,7 @@ Please allow a few moments to load, or [access via Google Drive](https://drive.g
 
 ![ClipBet Demo](public/ClipBet%20Demo%20K%20and%20M.gif)
 
-## Tech Stack
+## Tech Stack (Demo Website)
 
 - Next.js, Tailwind CSS, Framer Motion
 - Apple App Clips for zero-install betting
@@ -26,3 +26,5 @@ Please allow a few moments to load, or [access via Google Drive](https://drive.g
 npm install
 npm run dev
 ```
+
+Press Ctrl+'-' to zoom out if the page is too tall for your screen.
