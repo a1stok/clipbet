@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClipBet
 
-## Getting Started
+Instant prediction markets at live events — no app, no account, no friction.
 
-First, run the development server:
+Fans scan a QR code or tap an NFC tag at a venue. An App Clip opens instantly. They place a bet, get a confirmation, and walk away. The whole thing takes under 30 seconds.
+
+## How It Works
+
+1. **Scan** — QR code or NFC tag at the event
+2. **Bet** — Pick an outcome, enter an amount, confirm
+3. **Win** — Get notified when bets close and results come in
+
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/yDGhNRkr158/maxresdefault.jpg)](https://youtube.com/shorts/yDGhNRkr158)
+
+👆 Click to watch the full demo on YouTube
+
+## Tech Stack
+
+- **Frontend**: Next.js, Tailwind CSS, Framer Motion
+- **Concept**: Apple App Clips for zero-install betting at live events
+- **Built at**: Hack Canada
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Opens at [localhost:3000](http://localhost:3000).
