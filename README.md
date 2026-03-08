@@ -4,6 +4,8 @@
 
 Instant prediction markets at live events. No app, no account, no friction.
 
+Technical implementation can be found as a PR here: [reactivapp/reactivapp-clipkit-lab](https://github.com/reactivapp/reactivapp-clipkit-lab)
+
 ## How It Works
 
 **User Flow:** Scan > Bet > Leave
