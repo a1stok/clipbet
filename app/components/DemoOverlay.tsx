@@ -152,7 +152,7 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                  {/* 0:30 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:30</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Viewing event info, total pool, and active bettors.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Viewing event info, pool, and bettors.</p>
                  </div>
                  {/* 0:33 */}
                  <div className="flex gap-4 items-start">
@@ -167,7 +167,7 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                  {/* 0:37 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">0:37</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Creating market with event information.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Defining event info and outcomes.</p>
                  </div>
                  {/* 0:57 */}
                  <div className="flex gap-4 items-start">
@@ -177,12 +177,12 @@ export function DemoOverlay({ showDemo }: DemoOverlayProps) {
                  {/* 1:02 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:02</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market is live! Generating QR code and share link.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Market is live! Generating QR for sharing.</p>
                  </div>
                  {/* 1:08 */}
                  <div className="flex gap-4 items-start">
                    <span className="mono text-sm tracking-widest text-[#7BB89A] font-bold shrink-0 mt-2 w-16">1:08</span>
-                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Managing dashboard, resolving events, and closing bets.</p>
+                   <p className="text-xl md:text-2xl text-black/80 font-serif leading-relaxed">Managing dashboard and closing bets.</p>
                  </div>
                </div>
              </div>
